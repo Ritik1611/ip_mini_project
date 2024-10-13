@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './login.css';
+import './index.css'
 import { Helmet } from 'react-helmet';
 
 const Login = () => {
@@ -25,7 +26,7 @@ const Login = () => {
       
             if (data.status === 'success') {
                 alert(data.message);
-                navigate('/dashboard/teacher_dashboard');
+                navigate('/dashboard/add_student');
             } else {
                 alert(data.message);
             }
@@ -36,7 +37,7 @@ const Login = () => {
     };
 
     const handleSignUpClick = () => {
-        navigate('/signup'); // Navigate to the signup page when the Sign Up button is clicked
+        navigate('/signup');
     };
 
     return (
@@ -68,10 +69,9 @@ const Login = () => {
 
                 <button className="btn" type="submit">Login</button>
                 <button 
-                    className="btn" 
-                    style={{ marginLeft: '5rem' }} 
-                    type="button" // Change type to button to prevent form submission
-                    onClick={handleSignUpClick} // Use navigate for signup page
+                    className="btn"  
+                    type="button" 
+                    onClick={handleSignUpClick}
                 >
                     Sign Up
                 </button>

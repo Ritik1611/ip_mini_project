@@ -26,7 +26,7 @@ const Signup = () => {
 
             if (data.status === 'success') {
                 alert(data.message);
-                navigate('/teacher_dashboard'); 
+                navigate('/dashboard/add_student'); 
             } else {
                 alert(data.message);
             }
@@ -72,9 +72,7 @@ const Signup = () => {
                     required/>
 
                 <button className="btn" type="submit">Sign Up</button>
-                <button className="btn" style={{
-                    marginLeft: '5rem'
-                }}
+                <button className="btn" 
                     onClick={() => window.location.href = '/login'}>
                     Login
                 </button>

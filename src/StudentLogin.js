@@ -8,12 +8,14 @@ const StudentLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
-      
+
         const username = e.target.username.value;
         const password = e.target.password.value;
         const division = e.target.division.value; 
         const rollNumber = e.target.rollNumber.value; 
-      
+
+        console.log("Sending data:", { username, password, division, rollNumber }); // Debugging line
+        
         try {
             const response = await fetch('http://localhost:3000/student_login.php', {
                 method: 'POST',
@@ -22,9 +24,10 @@ const StudentLogin = () => {
                 },
                 body: JSON.stringify({ username, password, division, rollNumber }),
             });
-      
+
             const data = await response.json();
-      
+            console.log("Response data:", data);
+            
             if (data.status === 'success') {
                 alert(data.message);
                 navigate('/student_dashboard');
@@ -35,10 +38,6 @@ const StudentLogin = () => {
             console.error('Error:', error);
             alert('An error occurred. Please try again later.');
         }
-    };
-
-    const handleSignUpClick = () => {
-        navigate('/student_signup');
     };
 
     return (
