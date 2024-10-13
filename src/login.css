@@ -1,6 +1,7 @@
 input[type="text"],
 input[type="password"],
-input[type="email"] {
+input[type="email"],
+input[type="number"] {
     width: 100%;
     padding: 0.75rem;
     margin: 0.5rem 0 0.5rem 0; 
@@ -14,7 +15,8 @@ input[type="email"] {
 
 input[type="text"]:focus,
 input[type="password"]:focus,
-input[type="email"]:focus {
+input[type="email"]:focus,
+input[type="number"]:focus {
     outline: none;
     border: 2px solid var(--clr-accent);
 }
@@ -32,7 +34,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-image: url('/public/login.jpg'); 
     background-size: cover;
-    background-position: center;
+    background-position: top center;
     margin: 0;
     padding: 0;
     display: flex;

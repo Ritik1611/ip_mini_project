@@ -11,12 +11,10 @@ const NavBar = () => {
   };
 
   return (
-    <header className="container">
-        <nav className="navbar">
+        <header className="navbar">
             <div className="navbar-items">
-                <Link to="/teacher_dashboard" className="nav-item">Dashboard</Link>
+                <Link to="dashboard/teacher_dashboard" className="nav-item">Dashboard</Link>
                 <Link to="/add_student" className="nav-item">Add a Student</Link>
-                <Link to="/give_marks" className="nav-item">Give Marks</Link>
                 <Link to="/attendance" className="nav-item">Take Attendance</Link>
             </div>
             <div className="settings">
@@ -31,8 +29,7 @@ const NavBar = () => {
                     </div>
                 )}
             </div>
-        </nav>
-    </header>
+        </header>
   );
 }
 

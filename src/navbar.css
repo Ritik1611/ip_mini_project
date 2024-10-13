@@ -4,6 +4,11 @@
     align-items: center;
     background-color: var(--clr-primary);
     padding: 1rem;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
 }
 
 .navbar-items {
@@ -29,16 +34,19 @@
     background: none;
     border: none;
     cursor: pointer;
+    padding-right: 1.5rem;
 }
 
 .settings-icon {
-    width: 32px; /* Increased size of the icon */
-    height: 32px; /* Increased size of the icon */
+    width: 32px; 
+    height: 32px; 
+    display: block;
+    /* padding-right: 0.5rem; */
 }
 
 .settings-icon:hover {
-    width: 32px; /* Increased size of the icon */
-    height: 32px; /* Increased size of the icon */
+    width: 32px; 
+    height: 32px; 
     animation-name: icon;
     animation-duration: 1.5s;
 }

@@ -4,25 +4,35 @@ import NavBar from './NavBar';
 import TeacherDashboard from './TeacherDashboard';
 import Login from './Login';
 import Signup from './Signup';
+import Land from './Land';
+import StudentLogin from './StudentLogin';
+
+function DashboardLayout() {
+  return (
+    <>
+      <NavBar />
+      <Routes>
+        <Route path='teacher_dashboard' element={<TeacherDashboard />} />
+      </Routes>
+    </>
+  );
+}
 
 function App() {
   return (
     <Router>
       <div className='App'>
         <Routes>
-          <Route path='/' element={<Login />} />
+          <Route path='/' element={<Land />} />
+          <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route
-            path='/dashboard'
-            element={
+          <Route path='/student_login' element={<StudentLogin />} />
+          <Route path='/dashboard/*' element={<DashboardLayout />} />
+          <Route path='/student_dashboard' element={
               <>
-                <NavBar />
-                <Routes>
-                  <Route path='/teacher_dashboard' element={<TeacherDashboard />} />
-                  {/* <Route path="/attendance" element={<Attendance />} /> */}
-                </Routes>
+                {/* Add student dashboard component here */}
               </>
-            }
+            } 
           />
         </Routes>
       </div>

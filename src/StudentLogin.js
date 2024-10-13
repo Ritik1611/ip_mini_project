@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './login.css';
 import { Helmet } from 'react-helmet';
 
-const Login = () => {
+const StudentLogin = () => {
     const navigate = useNavigate(); 
 
     const handleSubmit = async (e) => {
@@ -11,21 +11,23 @@ const Login = () => {
       
         const username = e.target.username.value;
         const password = e.target.password.value;
+        const division = e.target.division.value; 
+        const rollNumber = e.target.rollNumber.value; 
       
         try {
-            const response = await fetch('http://localhost:3000/login.php', {
+            const response = await fetch('http://localhost:3000/student_login.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password }),
+                body: JSON.stringify({ username, password, division, rollNumber }),
             });
       
             const data = await response.json();
       
             if (data.status === 'success') {
                 alert(data.message);
-                navigate('/dashboard/teacher_dashboard');
+                navigate('/student_dashboard');
             } else {
                 alert(data.message);
             }
@@ -36,12 +38,12 @@ const Login = () => {
     };
 
     const handleSignUpClick = () => {
-        navigate('/signup'); // Navigate to the signup page when the Sign Up button is clicked
+        navigate('/student_signup');
     };
 
     return (
         <div className="container">
-            <Helmet>Scholarly - Login</Helmet>
+            <Helmet>Scholarly - Student Login</Helmet>
             <img 
                 src="/SCHOLARLY.png" 
                 alt="Logo" 
@@ -66,18 +68,30 @@ const Login = () => {
                     required 
                 />
 
+                <label htmlFor="division">Division</label>
+                <input 
+                    type="text" 
+                    id="division" 
+                    name="division" 
+                    placeholder="Enter your division" 
+                    required 
+                />
+
+                <label htmlFor="rollNumber">Roll Number</label>
+                <input 
+                    type="number" 
+                    id="rollNumber" 
+                    name="rollNumber" 
+                    placeholder="Enter your roll number"
+                    min="1"
+                    max="99" 
+                    required 
+                />
+                <br></br>
                 <button className="btn" type="submit">Login</button>
-                <button 
-                    className="btn" 
-                    style={{ marginLeft: '5rem' }} 
-                    type="button" // Change type to button to prevent form submission
-                    onClick={handleSignUpClick} // Use navigate for signup page
-                >
-                    Sign Up
-                </button>
             </form>
         </div>
     );
 };
 
-export default Login;
+export default StudentLogin;

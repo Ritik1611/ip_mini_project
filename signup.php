@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:3001"); // React app's port
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); 
+header("Access-Control-Allow-Headers: Content-Type");
+
 // Database connection
 $servername = "localhost"; 
 $username = "root"; 

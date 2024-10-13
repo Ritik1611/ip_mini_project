@@ -1,4 +1,8 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:3001");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); 
+header("Access-Control-Allow-Headers: Content-Type");
+
 // Database connection
 $servername = "localhost"; // Replace with your server name
 $username = "root"; // Replace with your database username
