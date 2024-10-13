@@ -7,6 +7,7 @@ import Land from './Land';
 import StudentLogin from './StudentLogin';
 import AddStudent from './AddStudent';
 import AttendanceForm from './AttendanceForm';
+import StudentDashboard from './StudentDashboard';
 
 function DashboardLayout() {
   return (
@@ -30,12 +31,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/student_login' element={<StudentLogin />} />
           <Route path='/dashboard/*' element={<DashboardLayout />} />
-          <Route path='/student_dashboard' element={
-              <>
-                {/* Add student dashboard component here */}
-              </>
-            } 
-          />
+          <Route path='/student_dashboard' element={<StudentDashboard />} /> 
         </Routes>
       </div>
     </Router>

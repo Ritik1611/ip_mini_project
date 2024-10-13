@@ -8,27 +8,30 @@ const StudentLogin = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault(); 
-
-        const username = e.target.username.value;
+      
+        const names = e.target.names.value; 
         const password = e.target.password.value;
         const division = e.target.division.value; 
-        const rollNumber = e.target.rollNumber.value; 
-
-        console.log("Sending data:", { username, password, division, rollNumber }); // Debugging line
-        
+        const roll_no = e.target.roll_no.value; 
+      
         try {
             const response = await fetch('http://localhost:3000/student_login.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ username, password, division, rollNumber }),
+                body: JSON.stringify({ names, password, division, roll_no }), 
             });
-
+      
             const data = await response.json();
-            console.log("Response data:", data);
-            
+      
             if (data.status === 'success') {
+                localStorage.setItem('student', JSON.stringify({
+                    name: names, 
+                    roll_no: roll_no, 
+                    division: division
+                }));
+
                 alert(data.message);
                 navigate('/student_dashboard');
             } else {
@@ -49,11 +52,11 @@ const StudentLogin = () => {
                 style={{ height: '250px', width: '250px', opacity: 1 }} 
             />
             <form onSubmit={handleSubmit}>
-                <label htmlFor="username">Username</label>
+                <label htmlFor="names">Username</label>
                 <input 
                     type="text" 
-                    id="username" 
-                    name="username" 
+                    id="names" 
+                    name="names" 
                     placeholder="Enter your username" 
                     required 
                 />
@@ -76,11 +79,11 @@ const StudentLogin = () => {
                     required 
                 />
 
-                <label htmlFor="rollNumber">Roll Number</label>
+                <label htmlFor="roll_no">Roll Number</label>
                 <input 
                     type="number" 
-                    id="rollNumber" 
-                    name="rollNumber" 
+                    id="roll_no" 
+                    name="roll_no"
                     placeholder="Enter your roll number"
                     min="1"
                     max="99" 
