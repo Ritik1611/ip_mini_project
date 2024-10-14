@@ -3,13 +3,7 @@ header("Access-Control-Allow-Origin: http://localhost:3001");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); 
 header("Access-Control-Allow-Headers: Content-Type");
 
-$servername = 'localhost';
-$dbname = 'se_mini_project';
-$username = 'root';
-$password = 'Ritikshetty@16';
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+require('db_connection.php');
 
 // Check connection
 if ($conn->connect_error) {

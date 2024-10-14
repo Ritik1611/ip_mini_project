@@ -1,7 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const RollNumbers = ({ rollNumbers, subject, setSubject, division }) => {
   const [attendanceData, setAttendanceData] = useState({});
+
+  useEffect(() => {
+    const initialData = {};
+    rollNumbers.forEach(roll => {
+      initialData[roll] = 'Present'; 
+    });
+    setAttendanceData(initialData);
+  }, [rollNumbers]);
 
   const handleAttendanceChange = (rollNo, status) => {
     setAttendanceData(prev => ({
@@ -17,9 +25,9 @@ const RollNumbers = ({ rollNumbers, subject, setSubject, division }) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ subject, attendanceData, division }), // Include division here
+      body: JSON.stringify({ subject, attendanceData, division }),
     });
-    
+
     if (response.ok) {
       alert('Attendance submitted successfully!');
     } else {
@@ -28,7 +36,7 @@ const RollNumbers = ({ rollNumbers, subject, setSubject, division }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{padding:'20px'}}>
+    <form onSubmit={handleSubmit} style={{ padding: '20px' }}>
       <label htmlFor="subject">Name of the Subject:</label>
       <input
         type="text"
@@ -39,42 +47,47 @@ const RollNumbers = ({ rollNumbers, subject, setSubject, division }) => {
         required
       />
 
-      <div id="rollNumbers" className="roll-numbers" style={{paddingTop:'50px'}}>
-        <h2 style={{fontSize:'25px', paddingBottom:'20px'}}>Select Roll Numbers and Attendance Status:</h2>
-        {rollNumbers.map((roll) => (
-          <div key={roll}>
-            <input
-              type="checkbox"
-              name={`roll_no[]`}
-              value={roll}
-              onChange={(e) => handleAttendanceChange(roll, e.target.checked ? 'Present' : 'Absent')}
-              defaultChecked
-            />
-            Roll No: {roll}
+      <div id="rollNumbers" className="roll-numbers" style={{ paddingTop: '50px' }}>
+        <h2 style={{ fontSize: '25px', paddingBottom: '20px' }}>
+          Select Roll Numbers and Attendance Status:
+        </h2>
 
-            <label>
-              Present
-              <input
-                type="radio"
-                name={`attendance_status_${roll}`}
-                value="Present"
-                defaultChecked
-                onChange={() => handleAttendanceChange(roll, 'Present')}
-              />
-            </label>
-            <label>
-              Absent
-              <input
-                type="radio"
-                name={`attendance_status_${roll}`}
-                value="Absent"
-                onChange={() => handleAttendanceChange(roll, 'Absent')}
-              />
-            </label>
-          </div>
-        ))}
+        <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+          <thead>
+            <tr>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Roll No</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Present</th>
+              <th style={{ border: '1px solid #ddd', padding: '8px' }}>Absent</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rollNumbers.map((roll) => (
+              <tr key={roll}>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>{roll}</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'center' }}>
+                  <input
+                    type="radio"
+                    name={`attendance_status_${roll}`}
+                    value="Present"
+                    checked={attendanceData[roll] === 'Present'}
+                    onChange={() => handleAttendanceChange(roll, 'Present')}
+                  />
+                </td>
+                <td style={{ border: '1px solid #ddd', padding: '8px', textAlign: 'center' }}>
+                  <input
+                    type="radio"
+                    name={`attendance_status_${roll}`}
+                    value="Absent"
+                    checked={attendanceData[roll] === 'Absent'}
+                    onChange={() => handleAttendanceChange(roll, 'Absent')}
+                  />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <button type="submit" className="btn">Submit Attendance</button>
+      <button type="submit" className="btn" style={{ marginTop: '20px' }}>Submit Attendance</button>
     </form>
   );
 };

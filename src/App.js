@@ -8,6 +8,7 @@ import StudentLogin from './StudentLogin';
 import AddStudent from './AddStudent';
 import AttendanceForm from './AttendanceForm';
 import StudentDashboard from './StudentDashboard';
+import CheckAttendance from './CheckAttendance';
 
 function DashboardLayout() {
   return (
@@ -16,6 +17,7 @@ function DashboardLayout() {
       <Routes>
         <Route path='/add_student' element={<AddStudent />} />
         <Route path='/attendance' element={<AttendanceForm />} />
+        <Route path='/check_attendance' element={<CheckAttendance />} />
       </Routes>
     </>
   );

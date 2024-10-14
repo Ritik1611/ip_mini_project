@@ -3,12 +3,7 @@ header("Access-Control-Allow-Origin: http://localhost:3001");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); 
 header("Access-Control-Allow-Headers: Content-Type");
 
-$host = 'localhost';
-$dbname = 'se_mini_project';
-$username = 'root';
-$password = 'Ritikshetty@16';
-
-$conn = new mysqli($host, $username, $password, $dbname);
+require('db_connection.php');
 
 if ($conn->connect_error) {
     die(json_encode(array('status' => 'error', 'message' => 'Database connection failed')));

@@ -3,13 +3,7 @@ header("Access-Control-Allow-Origin: http://localhost:3001"); // React app's por
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS"); 
 header("Access-Control-Allow-Headers: Content-Type");
 
-// Database connection
-$servername = "localhost"; 
-$username = "root"; 
-$password = "Ritikshetty@16"; 
-$dbname = "se_mini_project"; 
-
-$conn = new mysqli($servername, $username, $password, $dbname);
+require('db_connection.php');
 
 if ($conn->connect_error) {
     die(json_encode(['status' => 'error', 'message' => 'Connection failed: ' . $conn->connect_error]));

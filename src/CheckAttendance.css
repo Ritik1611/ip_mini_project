@@ -1,0 +1,54 @@
+/* CheckAttendance.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4; /* Light gray background for better contrast */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add some padding around the content */
+  }
+  
+  h1 {
+    color: #333; /* Dark gray color for the heading */
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Space below the heading */
+  }
+  
+  form {
+    background: white; /* White background for the form */
+    padding: 20px; /* Padding inside the form */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  .table {
+    width: 100%; /* Full width of the container */
+    border-collapse: collapse; /* Merge borders */
+    margin-top: 20px; /* Space above the table */
+  }
+  
+  .table th, .table td {
+    border: 1px solid #ddd; /* Light gray border */
+    padding: 8px; /* Padding inside the cells */
+    text-align: center; /* Center text in cells */
+  }
+  
+  .table th {
+    background-color: #f2f2f2; /* Light gray background for header cells */
+  }
+  
+  .btn {
+    background-color: #4CAF50; /* Green background for buttons */
+    color: white; /* White text color */
+    border: none; /* No border */
+    padding: 10px 15px; /* Padding inside the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 5px; /* Rounded corners for buttons */
+    margin-top: 20px; /* Space above the button */
+    display: block; /* Block display for button to take full width */
+    width: 100%; /* Full width of the container */
+  }
+  
+  .btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
+  
