@@ -1,18 +1,15 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type");
-
 include 'db_connection.php';
 
 $postData = json_decode(file_get_contents('php://input'), true);
 $division = $postData['division'];
 $date = $postData['date'];
 $subject = $postData['subject'];
-$attendanceData = json_encode($postData['attendanceData']);
+$roll_no = $postData['roll_no'];
+$attendance_status = $postData['attendance_status'];
 
-// Query to update attendance for the selected date
-$query = "UPDATE attendance SET attendance = '$attendanceData', subject = '$subject' WHERE division = '$division' AND date = '$date'";
+// Query to update attendance for the selected roll number, subject, and date
+$query = "UPDATE attendance SET attendance_status = '$attendance_status' WHERE division = '$division' AND subjects = '$subject' AND attendance_date = '$date' AND roll_no = '$roll_no'";
 if (mysqli_query($conn, $query)) {
     echo json_encode(['message' => 'Attendance updated successfully']);
 } else {
