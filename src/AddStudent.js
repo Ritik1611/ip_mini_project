@@ -29,7 +29,7 @@ const AddStudent = () => {
   };
 
   return (
-    <div className="dashboard-section main-content" style={{opacity:'0.5'}}>
+    <div className="dashboard-section main-content" style={{opacity:'0.5', width:'600px'}}>
       <Helmet>
         <title>Add Student</title>
       </Helmet>

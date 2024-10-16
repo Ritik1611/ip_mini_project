@@ -52,15 +52,10 @@ const StudentDashboard = () => {
         }
     }, [student]);
 
-    const handleLogout = () => {
-        localStorage.removeItem('student');
-        navigate('/student_login');
-    };
-
     return (
         <div className="dashboard-container">
             <Helmet>
-                <title>Student Dashboard - Scholarly</title>
+                <title>Check Attendance - Scholarly</title>
             </Helmet>
 
             <h1>Welcome, {student.name}</h1>
@@ -92,10 +87,6 @@ const StudentDashboard = () => {
             ) : (
                 <p>No attendance data available.</p>
             )}
-
-            <button className="logout-btn" onClick={handleLogout}>
-                Logout
-            </button>
         </div>
     );
 };

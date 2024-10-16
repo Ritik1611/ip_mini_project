@@ -29,7 +29,8 @@ const StudentLogin = () => {
                 localStorage.setItem('student', JSON.stringify({
                     name: names, 
                     roll_no: roll_no, 
-                    division: division
+                    division: division,
+                    student_id: data.data.student_id // Access student_id inside data object
                 }));
 
                 alert(data.message);
@@ -45,7 +46,9 @@ const StudentLogin = () => {
 
     return (
         <div className="container">
-            <Helmet>Scholarly - Student Login</Helmet>
+            <Helmet>
+                <title>Scholarly - Student Login</title>
+            </Helmet>
             <img 
                 src="/SCHOLARLY.png" 
                 alt="Logo" 

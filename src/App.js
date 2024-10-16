@@ -9,6 +9,9 @@ import AddStudent from './AddStudent';
 import AttendanceForm from './AttendanceForm';
 import StudentDashboard from './StudentDashboard';
 import CheckAttendance from './CheckAttendance';
+import GiveMarks from './GiveMarks';
+import CheckMarks from './CheckMarks';
+import StudentNavBar from './StudentNavBar';
 
 function DashboardLayout() {
   return (
@@ -18,9 +21,22 @@ function DashboardLayout() {
         <Route path='/add_student' element={<AddStudent />} />
         <Route path='/attendance' element={<AttendanceForm />} />
         <Route path='/check_attendance' element={<CheckAttendance />} />
+        <Route path='/give_marks' element={<GiveMarks />} />
       </Routes>
     </>
   );
+}
+
+function StudentDashboardLayout() {
+  return (
+    <>
+      <StudentNavBar />
+      <Routes>
+        <Route path='/check_attendance' element={<StudentDashboard />} />
+        <Route path='/check_marks' element={<CheckMarks />} />
+      </Routes>
+    </>
+  )
 }
 
 function App() {
@@ -33,7 +49,7 @@ function App() {
           <Route path='/signup' element={<Signup />} />
           <Route path='/student_login' element={<StudentLogin />} />
           <Route path='/dashboard/*' element={<DashboardLayout />} />
-          <Route path='/student_dashboard' element={<StudentDashboard />} /> 
+          <Route path='/student_dashboard/*' element={<StudentDashboardLayout />} /> 
         </Routes>
       </div>
     </Router>

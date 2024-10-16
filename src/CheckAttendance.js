@@ -90,7 +90,7 @@ const CheckAttendance = () => {
 
     return (
         <div style={{ padding: '20px' }} className='container'>
-            <h2>Check Attendance</h2>
+            <h2>Edit Attendance</h2>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="division">Division:</label>
                 <input

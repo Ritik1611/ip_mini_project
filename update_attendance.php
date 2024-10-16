@@ -8,7 +8,6 @@ $subject = $postData['subject'];
 $roll_no = $postData['roll_no'];
 $attendance_status = $postData['attendance_status'];
 
-// Query to update attendance for the selected roll number, subject, and date
 $query = "UPDATE attendance SET attendance_status = '$attendance_status' WHERE division = '$division' AND subjects = '$subject' AND attendance_date = '$date' AND roll_no = '$roll_no'";
 if (mysqli_query($conn, $query)) {
     echo json_encode(['message' => 'Attendance updated successfully']);
