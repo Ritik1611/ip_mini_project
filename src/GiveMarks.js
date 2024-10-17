@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './index.css'
 import './add_student.css'
 import './main.css'
+import './dashboard.css'
 import * as XLSX from 'xlsx';
 
 const GiveMarks = () => {

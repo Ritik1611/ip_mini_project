@@ -92,3 +92,30 @@
         padding: 8px 16px;
     }
 }
+
+.marks-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.marks-table thead th {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+}
+
+.marks-table td, .marks-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.marks-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.marks-table tr:hover {
+    background-color: #ddd;
+}

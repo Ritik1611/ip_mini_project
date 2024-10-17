@@ -23,7 +23,7 @@ $password = $data['password'];
 $division = $data['division'];
 $roll_no = $data['roll_no'];
 
-$query = "SELECT student_id, names, division, roll_no FROM students WHERE names = ? AND passwords = ? AND division = ? AND roll_no = ?";
+$query = "SELECT id, names, division, roll_no FROM students WHERE names = ? AND passwords = ? AND division = ? AND roll_no = ?";
 $stmt = $conn->prepare($query);
 
 if ($stmt === false) {
@@ -40,7 +40,7 @@ if ($result && $result->num_rows > 0) {
         'status' => 'success',
         'message' => 'Login successful!',
         'data' => array(
-            'student_id' => $studentData['student_id'],
+            'student_id' => $studentData['id'],  // Use 'id' instead of 'student_id'
             'names' => $studentData['names'],
             'division' => $studentData['division'],
             'roll_no' => $studentData['roll_no']

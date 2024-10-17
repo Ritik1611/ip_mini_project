@@ -1,98 +1,90 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import * as XLSX from 'xlsx';
-import './index.css';
-import './add_student.css';
-import './main.css';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './dashboard.css';
+import { Helmet } from 'react-helmet';
 
 const CheckMarks = () => {
-  const [marksData, setMarksData] = useState([]);
-  const [error, setError] = useState('');
-  const [rollNo, setRollNo] = useState(''); // State for roll number
-  const [division, setDivision] = useState(''); // State for division
+    const [marksData, setMarksData] = useState([]);
+    const [student, setStudent] = useState({
+        name: '',
+        roll_no: null,
+        division: ''
+    });
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
-  // Fetch the marks for the student based on roll number and division
-  const fetchMarks = useCallback(async () => {
-    try {
-      if (!rollNo || !division) {
-        throw new Error('Please enter both roll number and division.');
-      }
+    useEffect(() => {
+        const loggedStudent = JSON.parse(localStorage.getItem('student'));
+        if (loggedStudent) {
+            setStudent(loggedStudent);
+        } else {
+            navigate('/student_login');
+        }
+    }, [navigate]);
 
-      const response = await fetch(`http://localhost:3000/get_marks.php?roll_no=${rollNo}&division=${division}`);
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch marks');
-      }
+    useEffect(() => {
+        if (student.roll_no && student.division) {
+            const fetchMarks = async () => {
+                try {
+                    const response = await fetch('http://localhost:3000/get_marks.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            roll_no: student.roll_no,
+                            division: student.division,
+                        }),
+                    });
 
-      const data = await response.json();
+                    const data = await response.json();
+                    if (data.status === 'success') {
+                        setMarksData(data.marks);
+                    } else {
+                        setError(data.message);
+                    }
+                } catch (err) {
+                    setError('Failed to fetch marks data.');
+                }
+            };
 
-      if (data.status === 'success') {
-        setMarksData(data.marks); // Assuming the marks data is in data.marks
-        setError('');
-      } else {
-        throw new Error(data.message || 'Failed to retrieve marks');
-      }
-    } catch (error) {
-      setError(`Error fetching marks: ${error.message}`);
-    }
-  }, [rollNo, division]); // Adding rollNo and division as dependencies
+            fetchMarks();
+        }
+    }, [student]);
 
-  // Function to export marks data to Excel
-  const exportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(marksData);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Marks');
-    XLSX.writeFile(workbook, `Marks_${new Date().toLocaleDateString()}.xlsx`);
-  };
+    return (
+        <div className="dashboard-container">
+            <Helmet>
+                <title>Check Marks - Scholarly</title>
+            </Helmet>
 
-  return (
-    <div className="container">
-      <h1>Check Marks</h1>
+            <h1>Welcome, {student.name}</h1>
 
-      {/* Input fields for roll number and division */}
-      <div>
-        <input 
-          type="text" 
-          placeholder="Enter Roll Number" 
-          value={rollNo} 
-          onChange={(e) => setRollNo(e.target.value)} 
-        />
-        <input 
-          type="text" 
-          placeholder="Enter Division" 
-          value={division} 
-          onChange={(e) => setDivision(e.target.value)} 
-        />
-        <button onClick={fetchMarks}>Fetch Marks</button>
-      </div>
+            {error && <p className="error">{error}</p>}
 
-      {error && <p className="error">{error}</p>}
-
-      {marksData.length > 0 ? (
-        <>
-          <table className="marks-table">
-            <thead>
-              <tr>
-                <th>Subject</th>
-                <th>Marks</th>
-              </tr>
-            </thead>
-            <tbody>
-              {marksData.map((mark, index) => (
-                <tr key={index}>
-                  <td>{mark.subject}</td>
-                  <td>{mark.marks}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-
-          <button className="btn" onClick={exportToExcel}>Export as Excel</button>
-        </>
-      ) : (
-        <p>No marks available to display.</p>
-      )}
-    </div>
-  );
+            <h2>Your Marks</h2>
+            {marksData.length > 0 ? (
+                <table className="marks-table">
+                    <thead>
+                        <tr>
+                            <th>Subject</th>
+                            <th>Marks</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {marksData.map((record, index) => (
+                            <tr key={index}>
+                                <td>{record.subjects}</td>
+                                <td>{record.marks}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            ) : (
+                <p>No marks available to display.</p>
+            )}
+        </div>
+    );
 };
 
 export default CheckMarks;

@@ -34,7 +34,7 @@ const StudentLogin = () => {
                 }));
 
                 alert(data.message);
-                navigate('/student_dashboard');
+                navigate('/student_dashboard/check_attendance');
             } else {
                 alert(data.message);
             }
